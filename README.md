@@ -1,11 +1,11 @@
 # SillySilly
 This is a web based insurance application project. 
-# Java_Swing
-This is the first training project. Totally there are 4 team members.
+
+
 
 
 # Requirement
-Create a Java Desktop Application using Java Swing (JFC), File Handling and Collections API for the following business scenario:
+Create a Java web Application using Java Swing, File Handling and Collections API for the following business scenario:
 
 An Insurance company is offering Vehicle insurance for customers. Need to have a quick solution for prospected customers to make a decision.
 
@@ -28,8 +28,8 @@ java -cp target/project1-0.1.0.jar controllers.MainController
 for documents modification, use links below. Every version should be submitted to docs folder.
 *For google doc files, use Suggesting Mode for sake of easy peer review.*
 * [Requirements Analysis](http://bit.ly/1GEDB3u)
-* [UML-Class Diagram](http://bit.ly/1GEDtAZ)
-* [Basic View](http://bit.ly/1H5OlrO)
+
+
 
 # References
 * [How is car insurance calculated?](http://bit.ly/1GCLynH)
