@@ -5,7 +5,8 @@ This is a web based insurance application project.
 
 
 # Requirement
-Create a Java web Application using Java Swing, File Handling and Collections API for the following business scenario:
+Create a Java web Application using Java Web Technologies with Hibernate, Spring MVC involved.
+business scenario:
 
 An Insurance company is offering Vehicle insurance for customers. Need to have a quick solution for prospected customers to make a decision.
 
@@ -16,21 +17,9 @@ Users are able to register, fill personal and car info on the web and the applic
 Also decide on the scope of the project (features to be supported)
 
 
-
-#### Running
-- Maven
-```bash
-mvn package
-java -cp target/project1-0.1.0.jar controllers.MainController
-```
-- IDE
-1. import as maven project 
-2. run `controllers.MainController`
-
-
 # Documents
 for documents modification, use links below. Every version should be submitted to docs folder.
-*For google doc files, use Suggesting Mode for sake of easy peer review.*
+**For google doc files, use Suggesting Mode for sake of easy peer review.**
 * [Requirements Analysis](http://bit.ly/1GEDB3u)
 
 
