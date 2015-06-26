@@ -29,6 +29,9 @@ for documents modification, use links below. Every version should be submitted t
 * [Home page demo](http://sillysilly.webflow.io/)
 * [second page demo](http://sillysilly1.webflow.io/)
 
+## alternatives
+* [Home Page](http://bit.ly/1LzFI9K)
+
 # References
 * [How is car insurance calculated?](http://bit.ly/1GCLynH)
 * [Vehicle Insurance Policy System through UML](http://bit.ly/1ISGVbL)
