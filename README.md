@@ -17,7 +17,7 @@ Users are able to register, fill personal and car info on the web and the applic
 Also decide on the scope of the project (features to be supported)
 
 #Data Modeling
-* [data model](https://drive.google.com/file/d/0B8nhHD5E4-czSS1NZERPMjhDNEE/view?usp=sharing)
+* [data model](http://bit.ly/1QTHq9E)
 
 
 # Documents
