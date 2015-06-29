@@ -1,12 +1,17 @@
 package com.marlabs.trainee.model;
 
-import javax.persistence.*;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import javax.persistence.GeneratedValue;
 /**
  * Created by Rico on 6/29/15.
  */
 @Entity
-@Table (name = "test1")
+@Table(name = "test")
 public class Claim {
     @Id
     @Column(name = "id")
