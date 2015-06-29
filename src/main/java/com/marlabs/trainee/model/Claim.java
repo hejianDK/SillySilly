@@ -21,10 +21,6 @@ public class Claim {
     @Column(name = "name")
     private String title;
 
-    public Claim(long id, String name){
-        this.id = id;
-        this.title = name;
-    }
 
     public long getId() {
         return id;

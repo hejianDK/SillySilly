@@ -12,7 +12,10 @@ public class Main {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(new Claim(1,"qgqmo"));
+        Claim claim = new Claim();
+        claim.setId(1);
+        claim.setTitle("qgmqo");
+        session.save(claim);
         session.getTransaction().commit();
         session.close();
     }
