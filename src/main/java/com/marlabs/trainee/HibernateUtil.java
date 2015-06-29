@@ -27,8 +27,4 @@ public class HibernateUtil {
         return sessionFactory == null ? buildSessionFactory() : sessionFactory;
     }
 
-    public static void main(String[] args) {
-        getSessionFactory();
-    }
-
 }
