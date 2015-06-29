@@ -14,7 +14,8 @@ public class HibernateUtil {
         try {
             Configuration configuration = new Configuration().configure();
             System.out.println("Hibernate Configuration loaded.");
-            StandardServiceRegistry ssrb = new StandardServiceRegistryBuilder().build();
+            StandardServiceRegistry ssrb = new StandardServiceRegistryBuilder().
+                    applySettings(configuration.getProperties()).build();
             System.out.println("Standard Service Registry loaded");
             return configuration.buildSessionFactory(ssrb);
         } catch (Throwable ex) {
