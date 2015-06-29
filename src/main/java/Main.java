@@ -13,7 +13,6 @@ public class Main {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Claim claim = new Claim();
-        claim.setId(1);
         claim.setTitle("qgmqo");
         session.save(claim);
         session.getTransaction().commit();
