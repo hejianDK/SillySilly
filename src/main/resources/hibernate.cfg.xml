@@ -8,6 +8,7 @@
     <session-factory>
 
         <!-- Database connection settings -->
+        <!--<property name="hbm2ddl">update</property>-->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/my</property>
@@ -29,6 +30,15 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <!--<property name="hbm2ddl.auto">update</property>-->
+
+        <!--<c3p0 connection pool configuration>-->
+        <property name="c3p0.acquire_increment">1</property>
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">3000</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">300</property>
+
     <mapping class="com.marlabs.trainee.model.Claim"/>
     </session-factory>
 
