@@ -11,9 +11,9 @@
         <!--<property name="hbm2ddl">update</property>-->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/my</property>
-        <property name="hibernate.connection.username">rico</property>
-        <property name="hibernate.connection.password">0806</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/silly</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <!--<property name="connection.pool_size">1</property>-->
@@ -39,7 +39,10 @@
         <property name="hibernate.c3p0.max_statements">50</property>
         <property name="hibernate.c3p0.idle_test_period">300</property>
 
-    <mapping class="com.marlabs.trainee.model.Claim"/>
+        <mapping class="com.marlabs.trainee.model.Claim"/>
+        <mapping class="com.marlabs.trainee.model.Car"/>
+        <mapping class="com.marlabs.trainee.model.User"/>
+        <mapping class="com.marlabs.trainee.model.Insurance"/>
     </session-factory>
 
 </hibernate-configuration>

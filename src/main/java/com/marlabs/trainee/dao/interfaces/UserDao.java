@@ -1,10 +1,10 @@
-package com.marlabs.trainee.dao;
+package com.marlabs.trainee.dao.interfaces;
 
 import com.marlabs.trainee.model.User;
 
 /**
  * Created by Rico on 7/1/15.
  */
-public class UserDao {
+public interface UserDao {
 
 }

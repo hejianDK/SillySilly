@@ -1,9 +1,16 @@
 package com.marlabs.trainee.model;
 
+import com.marlabs.trainee.utils.Utils;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Map;
 
+@Entity
+@Table(name = "users")
 public class User implements Serializable {
     public enum CreditLevel {A, B, C, D, E}
 
@@ -11,8 +18,8 @@ public class User implements Serializable {
 
     @Id
     @Column(name = "USER_ID")
-    @GeneratedValue
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long userId;
 
     @Column(name = "USER_NAME")
     private String userName;
@@ -20,31 +27,56 @@ public class User implements Serializable {
     private String firstName;
     @Column(name = "LAST_NAME")
     private String lastName;
-    @Column(name = "PASSWORD")
-    private Byte[] password;
+    @Column(name = "USER_PASSWORD")
+    private byte[] password;
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "BIRTHDAY")
+    @Transient
     private LocalDate birthday;
 
-    @Column(name = "LICENSE_DATE")
+    @Transient
     private LocalDate licenseDate;
+
     @Column(name = "OCCUPATION")
     private String occupation;
+
     @Column(name = "ADDRESS")
     private String address;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "CREDIT_RECORD")
     private CreditLevel creditLevel;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "CAR_ACCIDENT_RECORD")
     private AccidentRecord accidentRecord;
 
+    @Column(name = "BIRTHDAY")
+    private Date birthdayPersist;
+
+    @Column(name = "LICENSE_DATE")
+    private Date licensePersist;
 
 
-    public long getId() {
-        return id;
+    //    Set<Insurance> insurances;
+//
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "car_user",
+            joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CAR_ID", referencedColumnName = "CAR_ID"))
+    @MapKeyColumn(name = "IS_OWNER")
+    Map<Car, Boolean> carBooleanMap;
+
+    @PostLoad
+    private void convertDate() {
+        birthday = birthdayPersist == null ? null : Utils.DateToLocalDate(birthdayPersist, ZoneId.systemDefault());
+        licenseDate = licensePersist == null ? null : Utils.DateToLocalDate(licensePersist, ZoneId.systemDefault());
+    }
+
+
+    public long getUserId() {
+        return userId;
     }
 
     public String getUserName() {
@@ -71,11 +103,11 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public Byte[] getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
-    public void setPassword(Byte[] password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 
@@ -93,6 +125,8 @@ public class User implements Serializable {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+        this.birthdayPersist =
+                birthday == null ? null : Utils.LocalDateToDate(birthday, ZoneId.systemDefault());
     }
 
     public LocalDate getLicenseDate() {
@@ -101,6 +135,8 @@ public class User implements Serializable {
 
     public void setLicenseDate(LocalDate licenseDate) {
         this.licenseDate = licenseDate;
+        this.licensePersist =
+                licenseDate == null ? null : Utils.LocalDateToDate(licenseDate, ZoneId.systemDefault());
     }
 
     public String getOccupation() {
@@ -138,7 +174,7 @@ public class User implements Serializable {
     public static class Builder {
         //required fields
         private String userName;
-        private Byte[] password;
+        private byte[] password;
 
 
         //non-required fields
@@ -152,7 +188,11 @@ public class User implements Serializable {
         private CreditLevel creditLevel;
         private AccidentRecord accidentRecord;
 
-        public Builder(String userName, Byte[] password, String email) {
+        //for persist
+        private Date birthdayPersist;
+        private Date licensePersist;
+
+        public Builder(String userName, byte[] password, String email) {
             this.userName = userName;
             this.password = password;
             this.email = email;
@@ -170,11 +210,15 @@ public class User implements Serializable {
 
         public Builder birthday(LocalDate birthday) {
             this.birthday = birthday;
+            this.birthdayPersist =
+                    birthday == null ? null : Utils.LocalDateToDate(birthday, ZoneId.systemDefault());
             return this;
         }
 
         public Builder licenseDate(LocalDate licenseDate) {
             this.licenseDate = licenseDate;
+            this.licensePersist =
+                    licenseDate == null ? null : Utils.LocalDateToDate(licenseDate, ZoneId.systemDefault());
             return this;
         }
 
@@ -215,7 +259,12 @@ public class User implements Serializable {
         address = builder.address;
         creditLevel = builder.creditLevel;
         accidentRecord = builder.accidentRecord;
+        birthdayPersist = builder.birthdayPersist;
+        licensePersist = builder.licensePersist;
 
+    }
+
+    User() {
     }
 
 }
