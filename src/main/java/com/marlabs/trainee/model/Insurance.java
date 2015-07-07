@@ -2,13 +2,11 @@ package com.marlabs.trainee.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * Created by Rico on 7/3/15.
- */
-
-//@Entity
-//@Table(name = "insurances")
+@Entity
+@Table(name = "insurances")
 public class Insurance implements Serializable {
     public enum InsuranceType {CI, TPO, TPFT}
 
@@ -27,16 +25,23 @@ public class Insurance implements Serializable {
     @Column(name = "PRICE")
     private double price;
 
-    @Column(name = "CUID")
-    private long cuId;
+    @OneToMany(mappedBy = "insurance")
+    private final Set<Claim> claims = new HashSet<>();
 
-    public Insurance(InsuranceType insuranceType, int insuranceDuration, double price, long cuId) {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CAR_ID")
+    private Car car;
+
+    public Insurance(InsuranceType insuranceType, int insuranceDuration, double price, Car car) {
         this.insuranceType = insuranceType;
         this.insuranceDuration = insuranceDuration;
         this.price = price;
-        this.cuId = cuId;
+        this.car = car;
     }
 
+    /**
+     * Non-Argument constructor for persistence purpose,privilege can be default or above
+     */
     Insurance() {
     }
 
@@ -56,7 +61,7 @@ public class Insurance implements Serializable {
         return price;
     }
 
-    public long getCuId() {
-        return cuId;
+    public Set<Claim> getClaims() {
+        return claims;
     }
 }

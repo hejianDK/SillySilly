@@ -3,11 +3,14 @@ package com.marlabs.trainee.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
     public enum CreditLevel {A, B, C, D, E}
+
     public enum AccidentRecord {A, B, C, D, E}
 
     @Id
@@ -50,6 +53,13 @@ public class User implements Serializable {
     @Column(name = "CAR_ACCIDENT_RECORD")
     private AccidentRecord accidentRecord;
 
+    @ElementCollection
+    @CollectionTable(name = "car_user",
+            joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID"))
+    @Column(name = "IS_OWNER")
+    @MapKeyJoinColumn(name = "CAR_ID", referencedColumnName = "CAR_ID")
+    Map<Car, Boolean> carMap = new HashMap<>();
+
 
     public long getUserId() {
         return userId;
@@ -61,6 +71,14 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Map<Car, Boolean> getCarMap() {
+        return carMap;
+    }
+
+    public void setCarMap(Map<Car, Boolean> carMap) {
+        this.carMap = carMap;
     }
 
     public String getFirstName() {

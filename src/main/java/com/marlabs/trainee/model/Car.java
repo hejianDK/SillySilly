@@ -3,6 +3,8 @@ package com.marlabs.trainee.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Year;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Rico on 7/1/15.
@@ -10,7 +12,7 @@ import java.time.Year;
 @Entity
 @Table(name = "cars")
 public class Car implements Serializable {
-    public enum Usage{HIGH, MID, LOW}
+    public enum Usage {HIGH, MID, LOW}
 
     @Id
     @GeneratedValue
@@ -40,7 +42,27 @@ public class Car implements Serializable {
     private Usage carUsage;
 
 
-    //accessors
+
+    @ElementCollection
+    @CollectionTable(name = "car_user",
+            joinColumns = @JoinColumn(name = "CAR_ID", referencedColumnName = "CAR_ID"))
+    @Column(name = "IS_OWNER")
+    @MapKeyJoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
+    private final Map<User, Boolean> userMap = new HashMap<>();
+
+    @OneToOne(mappedBy = "car",fetch = FetchType.LAZY)
+    private Insurance insurance;
+
+
+//    //accessors
+
+    public Map<User, Boolean> getUserMap() {
+        return userMap;
+    }
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
 
     public String getBrand() {
         return brand;

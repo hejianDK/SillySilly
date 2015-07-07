@@ -12,8 +12,9 @@ public class Claim implements Serializable {
     @GeneratedValue
     private long claimId;
 
-    @Column(name = "INSURANCE_ID")
-    private long insuranceId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "INSURANCE_ID")
+    private Insurance insurance;
 
     @Column(name = "title")
     private String title;
@@ -21,14 +22,14 @@ public class Claim implements Serializable {
     @Column(name = "content")
     private String content;
 
-    public Claim(long insuranceId, String title, String content) {
-        this.insuranceId = insuranceId;
+    public Claim(Insurance insurance, String title, String content) {
+        this.insurance = insurance;
         this.title = title;
         this.content = content;
     }
 
-    public long getInsurance() {
-        return insuranceId;
+    public Insurance getInsurance() {
+        return insurance;
     }
 
     public long getClaimId() {
