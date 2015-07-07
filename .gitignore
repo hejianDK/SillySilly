@@ -1,3 +1,2 @@
-silly/.idea/*
-silly/src/test/*
-silly/target/*
+target/*
+project2.iml
