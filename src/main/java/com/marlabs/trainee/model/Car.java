@@ -1,19 +1,16 @@
 package com.marlabs.trainee.model;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Year;
-import java.util.Map;
 
 /**
  * Created by Rico on 7/1/15.
  */
 @Entity
 @Table(name = "cars")
-public class Car implements Serializable{
-    public enum Usage {HIGH, MID, LOW}
+public class Car implements Serializable {
+    public enum Usage{HIGH, MID, LOW}
 
     @Id
     @GeneratedValue
@@ -33,21 +30,18 @@ public class Car implements Serializable{
     private String model;
 
     @Column(name = "CAR_YEAR")
-    private int carYear;
+    private Year carYear;
 
     @Column(name = "MILES")
     private int miles;
 
-    @Enumerated (EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     @Column(name = "CAR_USAGE")
     private Usage carUsage;
 
-//    @ManyToMany()
-//    Map<User,Boolean> users;
-
-
 
     //accessors
+
     public String getBrand() {
         return brand;
     }
@@ -88,11 +82,11 @@ public class Car implements Serializable{
         this.model = model;
     }
 
-    public int getCarYear() {
+    public Year getCarYear() {
         return carYear;
     }
 
-    public void setCarYear(int carYear) {
+    public void setCarYear(Year carYear) {
         this.carYear = carYear;
     }
 
@@ -110,7 +104,7 @@ public class Car implements Serializable{
 
 
     // bulider
-    public static class Builder{
+    public static class Builder {
         // required
         private double basePrice;
         private Usage carUsage;
@@ -118,42 +112,46 @@ public class Car implements Serializable{
         private String brand;
         private String carType;
         private String model;
-        private int carYear;
+        private Year carYear;
         private int miles;
 
-        public Builder (double basePrice, Usage carUsage){
+        public Builder(double basePrice, Usage carUsage) {
             this.basePrice = basePrice;
             this.carUsage = carUsage;
         }
 
-        public Builder brand (String brand){
+        public Builder brand(String brand) {
             this.brand = brand;
-            return  this;
+            return this;
         }
 
-        public Builder carType(String carType){
+        public Builder carType(String carType) {
             this.carType = carType;
             return this;
         }
-        public Builder model (String model){
+
+        public Builder model(String model) {
             this.model = model;
             return this;
         }
-        public  Builder carYear (int carYear){
-            this.carYear  = carYear;
+
+        public Builder carYear(Year carYear) {
+            this.carYear = carYear;
             return this;
         }
-        public Builder miles (int miles){
+
+        public Builder miles(int miles) {
             this.miles = miles;
             return this;
         }
-        public Car build (){
+
+        public Car build() {
             return new Car(this);
         }
     }
 
     // private constructor
-    private Car(Builder builder){
+    private Car(Builder builder) {
         this.basePrice = builder.basePrice;
         this.carUsage = builder.carUsage;
         this.brand = builder.brand;
@@ -164,5 +162,6 @@ public class Car implements Serializable{
     }
 
     //no-argument constructor for hibernate
-    Car(){}
+    Car() {
+    }
 }

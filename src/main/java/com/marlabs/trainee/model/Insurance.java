@@ -2,15 +2,13 @@ package com.marlabs.trainee.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Rico on 7/3/15.
  */
 
-@Entity
-@Table(name = "insurances")
+//@Entity
+//@Table(name = "insurances")
 public class Insurance implements Serializable {
     public enum InsuranceType {CI, TPO, TPFT}
 
@@ -29,34 +27,17 @@ public class Insurance implements Serializable {
     @Column(name = "PRICE")
     private double price;
 
-    @OneToOne(targetEntity = User.class,cascade = CascadeType.ALL )
-    @JoinTable(name = "car_user",
-            joinColumns = @JoinColumn(name = "CUID"),
-            inverseJoinColumns = @JoinColumn(name = "USER_ID"))
-    private User user;
+    @Column(name = "CUID")
+    private long cuId;
 
-    @OneToOne(targetEntity = Car.class,cascade = CascadeType.ALL)
-    @JoinTable(name = "car_user",
-            joinColumns = @JoinColumn(name = "CUID"),
-            inverseJoinColumns = @JoinColumn(name = "CAR_ID"))
-    private Car car;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "insurance", fetch = FetchType.LAZY)
-    private Set<Claim> claims = new HashSet<>();
-
-    public Insurance(InsuranceType insuranceType, int insuranceDuration, double price, User user, Car car) {
+    public Insurance(InsuranceType insuranceType, int insuranceDuration, double price, long cuId) {
         this.insuranceType = insuranceType;
         this.insuranceDuration = insuranceDuration;
         this.price = price;
-        this.user = user;
-        this.car = car;
+        this.cuId = cuId;
     }
 
     Insurance() {
-    }
-
-    public Set<Claim> getClaims() {
-        return claims;
     }
 
     public long getInsuranceId() {
@@ -75,11 +56,7 @@ public class Insurance implements Serializable {
         return price;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public Car getCar() {
-        return car;
+    public long getCuId() {
+        return cuId;
     }
 }

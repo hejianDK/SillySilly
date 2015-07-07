@@ -1,12 +1,8 @@
 package com.marlabs.trainee.model;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by Rico on 6/29/15.
- */
 @Entity
 @Table(name = "claims")
 public class Claim implements Serializable {
@@ -16,9 +12,8 @@ public class Claim implements Serializable {
     @GeneratedValue
     private long claimId;
 
-    @ManyToOne
-    @JoinColumn(name = "INSURANCE_ID")
-    private Insurance insurance;
+    @Column(name = "INSURANCE_ID")
+    private long insuranceId;
 
     @Column(name = "title")
     private String title;
@@ -26,17 +21,17 @@ public class Claim implements Serializable {
     @Column(name = "content")
     private String content;
 
-    public Claim(Insurance insurance,String title, String content) {
-        this.insurance = insurance;
+    public Claim(long insuranceId, String title, String content) {
+        this.insuranceId = insuranceId;
         this.title = title;
         this.content = content;
     }
 
-    public Insurance getInsurance() {
-        return insurance;
+    public long getInsurance() {
+        return insuranceId;
     }
 
-    public long getClaimId(){
+    public long getClaimId() {
         return claimId;
     }
 
@@ -57,6 +52,7 @@ public class Claim implements Serializable {
     }
 
     //no-argument constructor for hibernate
-    Claim(){}
+    Claim() {
+    }
 
 }

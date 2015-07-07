@@ -1,19 +1,11 @@
 
-import com.marlabs.trainee.model.Car;
-import com.marlabs.trainee.model.Claim;
-import com.marlabs.trainee.model.Insurance;
-import com.marlabs.trainee.model.User;
-import com.marlabs.trainee.utils.HibernateUtil;
+import com.marlabs.trainee.model.*;
 import com.marlabs.trainee.utils.JPAUtil;
 import com.marlabs.trainee.utils.Utils;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnitUtil;
 import java.time.LocalDate;
+import java.time.Year;
 
 
 /**
@@ -33,7 +25,7 @@ public class Main {
 //        CarDao carService = new CarImpl();
         Car car = new Car.Builder(34.12, Car.Usage.LOW).
                 carType("truck").
-                carYear(2014).
+                carYear(Year.of(2000)).
                 brand("Lotus").miles(2134).
                 model("F3").
                 build();
@@ -51,17 +43,20 @@ public class Main {
                 creditLevel(User.CreditLevel.C).
                 accidentRecord(User.AccidentRecord.A).
                 build();
-        Insurance insurance = new Insurance(Insurance.InsuranceType.CI,2,32425.3,user,car);
+//        Insurance insurance = new Insurance(Insurance.InsuranceType.CI,2,32425.3,user,car);
 
-        String title = "what th efuck";
+        String title = "what th qergqmro";
         String content = "ermgioqergqegpio";
-        Claim claim = new Claim(insurance,title,content);
+//        Claim claim = new Claim(insurance,title,content);
 
-        insurance.getClaims().add(claim);
+//        insurance.getClaims().add(claim);
+
+//        CarUser carUser = new CarUser(7,5,false);
         EntityManager entityManager = JPAUtil.INSTANCE.getEntityManagerFactory().createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(user);
 //        entityManager.persist(car);
+//        entityManager.persist(carUser);
 //        entityManager.persist(insurance);
 //        entityManager.persist(claim);
 
@@ -69,10 +64,11 @@ public class Main {
 //        Hibernate.initialize(insurance1.getClaims());
 //        insurance1.getClaims().size();
         User user1 = (User) entityManager.find(User.class,user.getUserId());
+//        CarUser carUser1 = entityManager.find(CarUser.class,3L);
         entityManager.getTransaction().commit();
         entityManager.close();
-
         System.out.println(user1.getBirthday());
+//        System.out.println(carUser1.isOwner());
 
 //        insurance1.getClaims().forEach(c -> System.out.println(c.getTitle()));
 
