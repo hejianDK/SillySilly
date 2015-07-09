@@ -8,7 +8,6 @@ import javax.persistence.Persistence;
  */
 public enum  JPAUtil {
     INSTANCE;
-
     private final EntityManagerFactory entityManagerFactory;
     JPAUtil(){
         entityManagerFactory = Persistence.createEntityManagerFactory("com.marlabs.trainee.jpa");

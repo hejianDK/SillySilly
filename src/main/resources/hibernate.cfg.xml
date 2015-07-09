@@ -6,7 +6,6 @@
 <hibernate-configuration>
 
     <session-factory>
-
         <!-- Database connection settings -->
         <!--<property name="hbm2ddl">update</property>-->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -14,9 +13,10 @@
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/silly</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property>
-
-        <!-- JDBC connection pool (use the built-in) -->
-        <!--<property name="connection.pool_size">1</property>-->
+        <!--<property name="hibernate.current_session_context_class">thread</property>-->
+        <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
 
 
         <!-- Enable Hibernate's automatic session context management -->
@@ -32,6 +32,7 @@
         <!--<property name="hbm2ddl.auto">update</property>-->
 
         <!--<c3p0 connection pool configuration>-->
+        <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
         <property name="c3p0.acquire_increment">1</property>
         <property name="hibernate.c3p0.min_size">5</property>
         <property name="hibernate.c3p0.max_size">20</property>
@@ -39,10 +40,6 @@
         <property name="hibernate.c3p0.max_statements">50</property>
         <property name="hibernate.c3p0.idle_test_period">300</property>
 
-        <mapping class="com.marlabs.trainee.model.Claim"/>
-        <mapping class="com.marlabs.trainee.model.Car"/>
-        <mapping class="com.marlabs.trainee.model.User"/>
-        <mapping class="com.marlabs.trainee.model.Insurance"/>
     </session-factory>
 
 </hibernate-configuration>

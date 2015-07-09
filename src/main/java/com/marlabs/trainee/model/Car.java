@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.Year;
 import java.util.HashMap;
 import java.util.Map;
+import com.marlabs.trainee.utils.converters.YearPersistenceConverter;
 
 /**
  * Created by Rico on 7/1/15.
@@ -32,6 +33,7 @@ public class Car implements Serializable {
     private String model;
 
     @Column(name = "CAR_YEAR")
+    @Convert(converter = YearPersistenceConverter.class)
     private Year carYear;
 
     @Column(name = "MILES")

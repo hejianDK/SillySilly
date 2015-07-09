@@ -4,7 +4,7 @@ import javax.persistence.Converter;
 import java.time.LocalDate;
 import java.sql.Date;
 
-@Converter(autoApply = true)
+@Converter
 public class LocalDatePersistenceConverter implements AttributeConverter<LocalDate, Date> {
     @Override
     public java.sql.Date convertToDatabaseColumn(LocalDate entityValue) {

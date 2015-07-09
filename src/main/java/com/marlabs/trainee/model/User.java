@@ -1,5 +1,8 @@
 package com.marlabs.trainee.model;
 
+
+import com.marlabs.trainee.utils.converters.LocalDatePersistenceConverter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -34,9 +37,11 @@ public class User implements Serializable {
     private String email;
 
     @Column(name = "BIRTHDAY")
+    @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate birthday;
 
     @Column(name = "LICENSE_DATE")
+    @Convert(converter = LocalDatePersistenceConverter.class)
     private LocalDate licenseDate;
 
     @Column(name = "OCCUPATION")

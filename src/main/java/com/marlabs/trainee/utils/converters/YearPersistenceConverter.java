@@ -7,7 +7,7 @@ import java.time.Year;
 /**
  * Created by Rico on 7/7/15.
  */
-@Converter(autoApply = true)
+@Converter
 public class YearPersistenceConverter implements AttributeConverter<Year, Integer> {
     @Override
     public Integer convertToDatabaseColumn(Year year) {
