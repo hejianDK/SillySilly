@@ -5,11 +5,9 @@ import java.io.Serializable;
 import java.time.Year;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.marlabs.trainee.utils.converters.YearPersistenceConverter;
 
-/**
- * Created by Rico on 7/1/15.
- */
 @Entity
 @Table(name = "cars")
 public class Car implements Serializable {
@@ -44,7 +42,6 @@ public class Car implements Serializable {
     private Usage carUsage;
 
 
-
     @ElementCollection
     @CollectionTable(name = "car_user",
             joinColumns = @JoinColumn(name = "CAR_ID", referencedColumnName = "CAR_ID"))
@@ -52,7 +49,7 @@ public class Car implements Serializable {
     @MapKeyJoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")
     private final Map<User, Boolean> userMap = new HashMap<>();
 
-    @OneToOne(mappedBy = "car",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "car", fetch = FetchType.LAZY, optional = false)
     private Insurance insurance;
 
 

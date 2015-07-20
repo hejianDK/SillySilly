@@ -1,9 +1,15 @@
 
 import com.marlabs.trainee.model.*;
+import com.marlabs.trainee.utils.SessionFactoryUtils;
 import com.marlabs.trainee.utils.Utils;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 
 import java.time.LocalDate;
 import java.time.Year;
+import java.util.List;
 
 
 /**
@@ -16,6 +22,13 @@ public class Main {
                 carType("truck").
                 carYear(Year.of(2000)).
                 brand("Lotus").miles(2134).
+                model("F3").
+                build();
+
+        Car car1 = new Car.Builder(34.12, Car.Usage.LOW).
+                carType("truck").
+                carYear(Year.of(2000)).
+                brand("Ferrari").miles(2134).
                 model("F3").
                 build();
 
@@ -43,6 +56,26 @@ public class Main {
                 accidentRecord(User.AccidentRecord.A).
                 build();
 
+        Session session = SessionFactoryUtils.getSessionFactory().openSession();
+//        List<Car> list = session.createQuery(" from Car c ").list();
+
+//        list.forEach(l-> System.out.println(l.getCarId()));
+        session.getTransaction().begin();
+//        String hql = "select count(*) FROM Car c left join c.insurance i group by c.brand";
+        String hql = "from Car";
+//        final  int PAGE_SIZE = 2;
+//        for (int i = 0; i < 10; i+= PAGE_SIZE) {
+//            List<Long> cars = session.createQuery(hql).
+//                    setFirstResult(i).
+//                    setMaxResults(PAGE_SIZE).
+//                    list();
+//            cars.forEach(System.out::println);
+//        }
+        Query q = session.createQuery(hql);
+        List list = q.list();
+        list.forEach(System.out::println);
+
+//        session.get
 
 
     }

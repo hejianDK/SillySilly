@@ -39,6 +39,7 @@ public class Insurance implements Serializable {
         this.car = car;
     }
 
+
     /**
      * Non-Argument constructor for persistence purpose,privilege can be default or above
      */

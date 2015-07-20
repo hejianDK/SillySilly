@@ -52,7 +52,9 @@ public class Claim implements Serializable {
         this.content = content;
     }
 
-    //no-argument constructor for hibernate
+    /*
+    no-argument constructor for hibernate
+     */
     Claim() {
     }
 
