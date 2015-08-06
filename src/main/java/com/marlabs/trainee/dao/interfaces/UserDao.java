@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public interface UserDao {
-    public User saveUser(User u);
+    public long saveUser(User u);
     public void deleteUser(User u);
     public List<User> getAllUsers();
     public User getUserByUserName(String userName);

@@ -13,29 +13,27 @@ import java.util.List;
 /**
  * Created by Rico on 7/3/15.
  */
-@Repository(value = "CarDao")
-@Transactional
+
+@Repository("carDao")
 public class CarImpl implements CarDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    private final Session session = sessionFactory.getCurrentSession();
-
     @Override
-    public Car saveCar(Car car) {
-        session.saveOrUpdate(car);
-        return car;
+    public long saveCar(Car car) {
+        return (long) sessionFactory.getCurrentSession().save(car);
+
     }
 
     @Override
     public void deleteCar(Car car) {
-        session.delete(car);
+        sessionFactory.getCurrentSession().delete(car);
     }
 
     @Override
     public Car getCarById(long id) {
-        return session.get(Car.class, id);
+        return (Car)sessionFactory.getCurrentSession().get(Car.class, id);
     }
 
 

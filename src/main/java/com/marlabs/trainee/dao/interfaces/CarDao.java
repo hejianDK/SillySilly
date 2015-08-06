@@ -8,11 +8,11 @@ import java.util.List;
  * Created by Rico on 7/3/15.
  */
 public interface CarDao {
-    public Car saveCar(Car car);
+    public long saveCar(Car car);
 
     public void deleteCar(Car car);
 
-    public Car getCarById(long id);
+    public Car getCarById(long cid);
 
     public List<Car> getAllCars();
 }

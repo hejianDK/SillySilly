@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.marlabs.trainee.utils.converters.YearPersistenceConverter;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
 @Table(name = "cars")
@@ -185,4 +187,5 @@ public class Car implements Serializable {
     //no-argument constructor for hibernate
     Car() {
     }
+
 }

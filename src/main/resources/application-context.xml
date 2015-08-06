@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:/config/config.properties"/>
+
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" not pool bean>-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${driver_lass_name}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${username}"/>
+        <property name="password" value="${password}"/>
+
+        <property name="acquireIncrement" value="${c3p0.acquire_increment}"/>
+        <property name="minPoolSize" value="${c3p0.min_size}"/>
+        <property name="maxPoolSize" value="${c3p0.max_size}"/>
+        <property name="maxStatements" value="${c3p0.max_statements}"/>
+        <property name="maxIdleTime" value="${c3p0.timeout}"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="packagesToScan" value="com.marlabs.trainee.model"/>
+        <!--<property name="configLocation" value="hibernate.cfg.xml"/>-->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${dialect}</prop>
+                <prop key="hibernate.show_sql">${show_sql}</prop>
+                <prop key="hibernate.cache.use_second_level_cache">${cache.use_second_level_cache}</prop>
+                <prop key="hibernate.cache.provider_class">${cache.provider_class}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+    <!--</bean>-->
+
+    <!--<tx:annotation-driven/>-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>
